@@ -22,8 +22,8 @@ metrics = data['metrics']
 overall = [metric['overall'] for metric in metrics]
 
 # Crea un DataFrame dalle metriche
-metrics_df = pd.DataFrame(metrics[-10::])
-overall_df = pd.DataFrame(overall[-10::])
+metrics_df = pd.DataFrame(metrics[-100::])
+overall_df = pd.DataFrame(overall[-100::])
 
 # Convertilo in formato datetime
 metrics_df['timestamp'] = pd.to_datetime(metrics_df['timestamp'],dayfirst=True,format='ISO8601', utc=True)

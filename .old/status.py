@@ -16,12 +16,12 @@ class Status:
     url : str
     description : str
 
-    response : Response = field(default_factory=lambda : None,init=False)
+    response : Response | None = field(default_factory=lambda : None,init=False)
 
     timestamp : str = field(default_factory=lambda : datetime.now(timezone.utc).isoformat(), init=False)
-    status : str = field(default_factory=lambda: None,init=False)
-    code : int = field(default_factory=lambda: None, init=False)
-    latency : float = field(default_factory=lambda : None, init=False)
+    status : str | None = field(default_factory=lambda: None,init=False)
+    code : int | None = field(default_factory=lambda: None, init=False)
+    latency : float | None = field(default_factory=lambda : None, init=False)
 
     overall : dict[str, float] = field(default_factory=lambda: {
         "avg-latency" : 0.0,
@@ -66,7 +66,11 @@ class Status:
             uptime = 0.0
             downtime = 0.0
 
-        avg_latency = extendavg(self.overall['avg-latency'], n_metrics, self.latency)
+        if self.latency:
+            avg_latency = extendavg(self.overall['avg-latency'], n_metrics, self.latency)
+        else:
+            avg_latency = self.overall['avg-latency']
+
         avg_uptime = extendavg(self.overall['avg-uptime'], n_metrics, uptime)
         avg_downtime = extendavg(self.overall['avg-downtime'], n_metrics, downtime)
         avg_uptime_percentage = extendavg(self.overall['avg-uptime-percentage'], n_metrics, uptime_percentage)
