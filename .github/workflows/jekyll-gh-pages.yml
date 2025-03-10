@@ -26,11 +26,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout Main Branch
         uses: actions/checkout@v4
         with:
           ref: main
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Render Templates
+        run: |
+          python ./src/build.py
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -39,7 +51,7 @@ jobs:
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./site/public
-          destination: ./site/build
+          destination: ./_site
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
