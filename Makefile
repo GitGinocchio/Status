@@ -1,5 +1,5 @@
 
-.PHONY: install
+.PHONY: install run build
 
 venv:
 
@@ -11,7 +11,19 @@ endif
 
 install:
 	@make venv
-	@pip3 install -r dev-requirements.txt
+	@pip3 install -r requirements.txt
+	@echo Installation completed.
+
+build: 
+	@make venv
+	python ./src/build.py
+	@echo Build completed.
+
+unbuild:
+	@make venv
+	python ./src/unbuild.py
+	@echo Unbuild completed.
+
 
 run:
 	@make venv

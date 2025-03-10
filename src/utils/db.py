@@ -110,7 +110,7 @@ class Database:
         except sqlite3.IntegrityError as e: raise e
         else: return result
 
-    def addMetric(self, name : str, code : int, latency : float, status : str):
+    def addMetric(self, name : str, code : int | str | None, latency : float | None, status : str | None):
         try:
             cursor = self.cursor.execute(GET_LAST_METRIC, (name,))
             last_metric = cursor.fetchone()
@@ -163,8 +163,8 @@ class Database:
                                              if code == 200 else                        \
                                              (last_metric['last_uptime'], timestamp)
 
-            current_uptime_value = 0.0
-            current_downtime_value = 0.0
+            current_uptime_value = None
+            current_downtime_value = None
 
             if last_metric['code'] == 200:
                 last_uptime_timestamp = last_metric['timestamp'] if last_metric['last_uptime'] == None else last_metric['last_uptime']
@@ -213,9 +213,9 @@ class Database:
                 max_uptime = last_metric['max_uptime']
                 avg_uptime = last_metric['avg_uptime']
 
-            if not last_metric['avg_latency']:
+            if not last_metric['avg_latency'] or not last_metric['min_latency'] or not last_metric['max_latency']:
                 avg_latency = min_latency = max_latency = latency
-            else:
+            elif latency is not None:
                 avg_latency = extendavg(last_metric['avg_latency'], num_metrics, latency)
 
                 if latency < last_metric['min_latency']:
@@ -227,6 +227,10 @@ class Database:
                 else:
                     min_latency = last_metric['min_latency']
                     max_latency = last_metric['max_latency']
+            else:
+                avg_latency = last_metric['avg_latency']
+                min_latency = last_metric['min_latency']
+                max_latency = last_metric['max_latency']
 
             uptime_percentage = extendavg(last_metric['uptime_percentage'], num_metrics, current_uptime_percentage)
             avg_uptime_percentage = extendavg(last_metric['avg_uptime_percentage'], num_metrics, uptime_percentage)
@@ -260,10 +264,10 @@ class Database:
                 min_downtime,
                 max_downtime,
 
-                round(latency, 6), 
-                round(avg_latency, 6),
-                round(min_latency, 6),
-                round(max_latency, 6),
+                round(latency, 6) if latency else latency, 
+                round(avg_latency, 6) if avg_latency else avg_latency,
+                round(min_latency, 6) if min_latency else min_latency,
+                round(max_latency, 6) if max_latency else max_latency,
 
                 round(uptime_percentage, 3),
                 round(avg_uptime_percentage, 3),

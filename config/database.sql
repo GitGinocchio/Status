@@ -18,8 +18,8 @@ CREATE TABLE IF NOT EXISTS metrics (
     -- Ottenuti dalla richiesta
     last_uptime                         DATETIME NULL,                                      -- "%Y-%m-%d %H:%M:%S"
     last_downtime                       DATETIME NULL,                                      -- "%Y-%m-%d %H:%M:%S"
-    code                                INTEGER,                                            -- 000 -> 999 HTTP status codes
-    status                              TEXT,                                               -- "Tutti i servizi sono disponibili"
+    code                                TEXT INTEGER NULL,                                  -- 000 -> 999 HTTP status codes
+    status                              TEXT NULL,                                          -- "Tutti i servizi sono disponibili"
     
     -- Calcolati
     uptime                              REAL NULL,
