@@ -55,6 +55,9 @@ jobs:
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./src/site/build
+          name: 'Status Site Build'
 
   # Deployment job
   deploy:
