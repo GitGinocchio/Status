@@ -26,7 +26,11 @@ SELECT * FROM services
 # Metrics
 
 GET_ALL_METRICS_QUERY = """
-SELECT rowid, * FROM metrics
+SELECT rowid, * FROM metrics ORDER BY timestamp ASC
+"""
+
+GET_ALL_METRICS_BY_NAME_QUERY = """
+SELECT rowid, * FROM metrics WHERE name = ? ORDER BY timestamp ASC
 """
 
 GET_LAST_METRIC = """

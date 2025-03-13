@@ -39,6 +39,61 @@
         <p>Last updated on Mar 12 at 08:25pm GMT</p>
     </header>
     <main>
+        {% for service in services %}
+            <div class="service">
+                <div class="service-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" 
+                        width="16" 
+                        height="16" 
+                        viewBox="0 0 24 24" 
+                        fill="none"
+                        stroke="#10b981"
+                        stroke-width="2" 
+                        stroke-linecap="round"
+                        stroke-linejoin="round" 
+                        class="lucide lucide-circle-check">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="11" stroke="#10b981" stroke-width="2" stroke-opacity="0.3" />
+                        <path d="m9 12 2 2 4-4"/>
+                    </svg>
+                    <h3>{{ service.service.display_name }}</h3>
+                    <p>Last updated on {{ service.last_metric.timestamp }}</p>
+                </div>
+                <div class="service-content">
+                    <div class="metrics">
+                    {% for metric in service.metrics %}
+                        {% if metric.code == 200 %}
+                            {% if loop.first %}
+                            <div class="metric first green"></div>
+                            {% elif loop.last and metrics|length == 90 %}
+                            <div class="metric last green"></div>
+                            {% else %}
+                            <div class="metric green"></div>
+                            {% endif %}
+                        {% else %}
+                            {% if loop.first %}
+                            <div class="metric first red"></div>
+                            {% elif loop.last and metrics|length == 90 %}
+                            <div class="metric last red"></div>
+                            {% else %}
+                            <div class="metric red"></div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% for _ in range(90 - service.metrics|length) %}
+                        {% if loop.first and service.metrics|length == 0 %}
+                        <div class="metric first grey"></div>
+                        {% else %}
+                        <div class="metric grey"></div>
+                        {% endif %}
+                        {% if loop.last %}
+                        <div class="metric last grey"></div>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </main>
     <footer>
 

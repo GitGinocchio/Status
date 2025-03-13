@@ -30,12 +30,11 @@ class Database:
         return cls._instance
 
     def __enter__(self):
-        self._cursor = self.connection.cursor()
+        self.connect()
         return self
 
     def __exit__(self, exc_type, exc_val, traceback):
-        if self._cursor: self._cursor.close()
-        self._cursor = None
+        self.disconnect()
 
     @property
     def connection(self) -> sqlite3.Connection:
@@ -46,6 +45,13 @@ class Database:
     def cursor(self) -> sqlite3.Cursor:
         if not self._cursor: raise RuntimeError("Cursor has not been created yet")
         return self._cursor
+
+    def connect(self):
+        self._cursor = self.connection.cursor()
+
+    def disconnect(self):
+        if self._cursor: self._cursor.close()
+        self._cursor = None
 
     def executeQueryScript(self, script : str) -> None:
         logger.debug(f'Executing query script: {script}')
@@ -62,7 +68,8 @@ class Database:
             cursor = self.executeQuery(GET_ALL_SERVICES_QUERY)
             result = cursor.fetchall()
         except sqlite3.IntegrityError as e: raise e
-        else: return result
+        else: 
+            return [dict(row) for row in result]
 
     def addService(self, name : str, display_name : str, description : str, endpoint : str, type : str, enabled : bool = True):
         try:
@@ -108,7 +115,16 @@ class Database:
             cursor = self.executeQuery(GET_ALL_METRICS_QUERY)
             result = cursor.fetchall()
         except sqlite3.IntegrityError as e: raise e
-        else: return result
+        else: 
+            return [dict(row) for row in result]
+        
+    def getMetricsByName(self, name : str):
+        try:
+            cursor = self.executeQuery(GET_ALL_METRICS_BY_NAME_QUERY, (name,))
+            result = cursor.fetchall()
+        except sqlite3.IntegrityError as e: raise e
+        else: 
+            return [dict(row) for row in result]
 
     def addMetric(self, name : str, code : int | str | None, latency : float | None, status : str | None):
         try:

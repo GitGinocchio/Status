@@ -98,3 +98,61 @@ main {
     height: 30vh;
     width: 100%;
 }
+
+main .service {
+    margin: 20px;
+    padding: 5px;
+    border-bottom: 1px solid #21242d;
+}
+
+main .service-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 10px;
+}
+
+main .service-header p {
+    color: #8a91a5;
+    font-size: 13px;
+}
+
+main .service-content {
+
+}
+
+main .metrics {
+    display: flex;
+    flex-direction: row;
+    gap: 1px;
+    padding-bottom: 5px;
+}
+
+.metric {
+    width: 10px;
+    height: 32px;
+    border-radius: 1px;
+}
+
+.first {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.last {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.green {
+    background-color: #10b981;
+}
+
+.red {
+    background-color: red;
+}
+
+.grey {
+    background-color: #424757;
+}

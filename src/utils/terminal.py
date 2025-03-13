@@ -62,7 +62,7 @@ if config["logger"]["tofile"]:
 default_level = Level[str_lvl] if (str_lvl:=config["logger"]["level"]) in Level.__members__ else Level.INFO
 
 
-def getlogger(name : str = None, level : Level = None) -> logging.Logger:
+def getlogger(name : str | None = None, level : Level | None = None) -> logging.Logger:
     if name is None:
         match = re.match(r".*[\\/](.+?)(\.[^.]*$|$)", inspect.stack()[1].filename)
 
@@ -74,7 +74,7 @@ def getlogger(name : str = None, level : Level = None) -> logging.Logger:
     logger = logging.getLogger(name)
 
     if level is not None:
-        logger.setLevel(level[0])
+        logger.setLevel(level.value[0])
     else:
         logger.setLevel(default_level.value[0])
 
