@@ -7,7 +7,7 @@ templates_dir : str = config['templates-dir']
 build_dir : str = config['build-dir']
 
 loader = FileSystemLoader(templates_dir)
-env = Environment(loader=loader, autoescape=True)
+env = Environment(loader=loader, autoescape=True, trim_blocks=True, lstrip_blocks=True)
 
 templates = loader.list_templates()
 

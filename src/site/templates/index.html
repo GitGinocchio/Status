@@ -6,6 +6,7 @@
     <title>Status</title>
 
     <link rel="stylesheet" href="./static/css/index.css">
+    <script src="./static/js/index.js"></script>
 
 </head>
 <body>
@@ -63,21 +64,21 @@
                     <div class="metrics">
                     {% for metric in service.metrics %}
                         {% if metric.code == 200 %}
-                            {% if loop.first %}
-                            <div class="metric first green"></div>
-                            {% elif loop.last and metrics|length == 90 %}
-                            <div class="metric last green"></div>
-                            {% else %}
-                            <div class="metric green"></div>
-                            {% endif %}
+                        {% if loop.first %}
+                        <div class="metric first green" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                        {% elif loop.last and metrics|length == 90 %}
+                        <div class="metric last green" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
                         {% else %}
-                            {% if loop.first %}
-                            <div class="metric first red"></div>
-                            {% elif loop.last and metrics|length == 90 %}
-                            <div class="metric last red"></div>
-                            {% else %}
-                            <div class="metric red"></div>
-                            {% endif %}
+                        <div class="metric green" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                        {% endif %}
+                        {% else %}
+                        {% if loop.first %}
+                        <div class="metric first red" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                        {% elif loop.last and metrics|length == 90 %}
+                        <div class="metric last red" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                        {% else %}
+                        <div class="metric red" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                        {% endif %}
                         {% endif %}
                     {% endfor %}
                     {% for _ in range(90 - service.metrics|length) %}
@@ -94,6 +95,7 @@
                 </div>
             </div>
         {% endfor %}
+        <div id="popup-container"></div>
     </main>
     <footer>
 

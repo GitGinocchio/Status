@@ -156,3 +156,34 @@ main .metrics {
 .grey {
     background-color: #424757;
 }
+
+/* Add this CSS styles to make the popup appear */
+#popup-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+  }
+  
+  .popup-content {
+    padding: 20px;
+    width: 400px;
+    height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .popup-header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .popup-body {
+    padding: 20px;
+  }

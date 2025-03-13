@@ -9,7 +9,7 @@ def main():
 
     services = []
     for service in db.getServices():
-        metrics = db.getMetricsByName(service['name'])
+        metrics = db.getMetricsByName(service['name'])[-90:]
 
         services.append({
             'service' : service, 
