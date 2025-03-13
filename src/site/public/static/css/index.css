@@ -1,11 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@400;700&family=Noto+Sans:wght@400;700&display=swap');
+
 
 :root {
     --content-margin:               25%;
 
-    --default-background-color:     #0f121a;
+    --default-background-color:     #0d151e;
     --default-font-familiy:         "Inter","SF Pro Text","ui-sans-serif","system-ui","-apple-system","BlinkMacSystemFont",
                                     "\"Segoe UI\"","Roboto","\"Helvetica Neue\"","Arial","\"Noto Sans\"","sans-serif",
                                     "\"Apple Color Emoji\"","\"Segoe UI Emoji\"","\"Segoe UI Symbol\"","\"Noto Color Emoji\"";
+    --error-color:                 #CF0E0E;
 }
 
 html {
@@ -30,19 +33,15 @@ nav {
     align-items: center;
     margin-left: 1%;
     margin-right: 1%;
-
+    position: relative;
     height: 5vh;
-
+    padding: 5px;
     border-bottom: 1px solid #21242d;
 }
 
-nav * {
-    display: flex;
-    justify-content: left;
-    min-width: 30%;
-}
 
 nav div {
+    flex: 1;
     display: flex;
     flex-direction: row;
     text-align: center;
@@ -54,23 +53,27 @@ nav ul {
     gap: 20px;
     padding: 0;
     position: relative;
+    list-style: none;
 }
 
 nav li {
     gap: 20px;
-    list-style: none;
+    font-family: "Inter", sans-serif;
 }
 
 nav a {
     padding: 10px 15px;
     border-radius: 12px;
     text-decoration: none;
-    color: #8a91a5;
+    font-weight: bold;
+    color: white;
+    transition: 0.2s;
 }
 
-nav a .active {
-    color: white;
+nav a:hover {
+    background-color: #1b2a41;
 }
+
 
 /* Header */
 
@@ -79,6 +82,12 @@ header {
     flex-direction: column;
     padding-top: 10%;
     padding-bottom: 10%;
+}
+
+header h1 {
+    color: white;
+    font-size: 40px;
+    margin-bottom: 5px;
 }
 
 header svg {
@@ -92,8 +101,8 @@ header p {
 /* Main */
 
 main {
-    background-color: #191c24;
-    border: 1px solid #21242d;
+    background-color: #141c2b;
+    border: 1px solid #141c2b;
     border-radius: 12px;
     height: 30vh;
     width: 100%;
@@ -102,14 +111,14 @@ main {
 main .service {
     margin: 20px;
     padding: 5px;
-    border-bottom: 1px solid #21242d;
+    border-bottom: 3px solid #babbbf;
+    border-radius: 8px;
 }
 
 main .service-header {
     display: flex;
     flex-direction: row;
     align-items: center;
-
     gap: 10px;
 }
 
@@ -150,11 +159,11 @@ main .metrics {
 }
 
 .red {
-    background-color: red;
+    background-color: var(--error-color);
 }
 
 .grey {
-    background-color: #424757;
+    background-color: #15181c;
 }
 
 /* Add this CSS styles to make the popup appear */
