@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+
+    {% block script %}{% endblock script %}
+    {% block style %}{% endblock style %}
+</head>
+<body>
+    <nav>
+        <h3>Status</h3>
+        <div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/">Events</a></li>
+                <li><a href="/">Reports</a></li>
+            </ul>
+        </div>
+        <p></p>
+    </nav>
+    {% block content %}
+    {% endblock content %}
+    <footer>
+
+    </footer>
+</body>
+</html>

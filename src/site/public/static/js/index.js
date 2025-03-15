@@ -8,11 +8,18 @@ function showPopup(event, metric) {
     tooltip.className = 'tooltip';
 
     // Prepara il contenuto: status e timestamp;
-    tooltip.innerHTML = `<strong>Status:</strong> ${metric.status}<br>
-                         <strong>Code:</strong> ${metric.code}<br>
-                         ${metric.latency ? `<strong>Latency:<strong> ${metric.latency} seconds<br>` : "" }
-                         <strong>Timestamp:</strong> ${metric.timestamp}<br>
-                         `;
+    tooltip.innerHTML = `
+    <div>
+        <div class="tooltip-content">
+            <strong>Status:</strong> ${metric.status}<br>
+            <strong>Code:</strong> ${metric.code}<br>
+            ${metric.latency ? `<strong>Latency:</strong> ${metric.latency} seconds<br>` : "" }
+        </div>
+        <div class="tooltip-footer">
+            <strong>${metric.timestamp}</strong>
+        </div>
+    </div>
+    `;
 
     // Posiziona il tooltip appena sotto il cursore con un offset di 10px
     tooltip.style.left = (event.clientX + 10) + 'px';

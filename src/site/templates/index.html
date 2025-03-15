@@ -1,103 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Status</title>
+{% extends 'template.html' %}
 
-    <link rel="stylesheet" href="./static/css/index.css">
-    <script src="./static/js/index.js"></script>
+{% block title %}Status | Home{% endblock title %}
 
-</head>
-<body>
-    <nav>
-        <h3>Status</h3>
-        <div>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/">Events</a></li>
-                <li><a href="/">Reports</a></li>
-            </ul>
-        </div>
-        <p></p>
-    </nav>
-    <header>
-        <svg xmlns="http://www.w3.org/2000/svg" 
-            width="32" 
-            height="32" 
-            viewBox="0 0 24 24" 
-            fill="none"
-            stroke="#10b981"
-            stroke-width="2" 
-            stroke-linecap="round"
-            stroke-linejoin="round" 
-            class="lucide lucide-circle-check">
-            <circle cx="12" cy="12" r="10"/>
-            <circle cx="12" cy="12" r="11" stroke="#10b981" stroke-width="2" stroke-opacity="0.3" />
-            <path d="m9 12 2 2 4-4"/>
-        </svg>
-        <h1>All Services are online!</h1>
-        <p>Last updated on Mar 12 at 08:25pm GMT</p>
-    </header>
-    <main>
-        {% for service in services %}
-            <div class="service">
-                <div class="service-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 24 24" 
-                        fill="none"
-                        stroke="#10b981"
-                        stroke-width="2" 
-                        stroke-linecap="round"
-                        stroke-linejoin="round" 
-                        class="lucide lucide-circle-check">
-                        <circle cx="12" cy="12" r="10"/>
-                        <circle cx="12" cy="12" r="11" stroke="#10b981" stroke-width="2" stroke-opacity="0.3" />
-                        <path d="m9 12 2 2 4-4"/>
-                    </svg>
-                    <h3>{{ service.service.display_name }}</h3>
-                    <p>Last updated on {{ service.last_metric.timestamp }}</p>
-                </div>
-                <div class="service-content">
-                    <div class="metrics">
-                    {% for metric in service.metrics %}
-                        {% if metric.code == 200 %}
-                        {% if loop.first %}
-                        <div class="metric first green" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
-                        {% elif loop.last and metrics|length == 90 %}
-                        <div class="metric last green" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
-                        {% else %}
-                        <div class="metric green" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
-                        {% endif %}
-                        {% else %}
-                        {% if loop.first %}
-                        <div class="metric first red" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
-                        {% elif loop.last and metrics|length == 90 %}
-                        <div class="metric last red" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
-                        {% else %}
-                        <div class="metric red" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
-                        {% endif %}
-                        {% endif %}
-                    {% endfor %}
-                    {% for _ in range(90 - service.metrics|length) %}
-                        {% if loop.first and service.metrics|length == 0 %}
-                        <div class="metric first grey"></div>
-                        {% else %}
-                        <div class="metric grey"></div>
-                        {% endif %}
-                        {% if loop.last %}
-                        <div class="metric last grey"></div>
-                        {% endif %}
-                    {% endfor %}
-                    </div>
+{% block style %}
+<link rel="stylesheet" href="./static/css/index.css">
+{% endblock style %}
+
+
+{% block script %}
+<script src="./static/js/index.js"></script>
+{% endblock script %}
+
+
+{% block content %}
+<header>
+    <svg xmlns="http://www.w3.org/2000/svg" 
+        width="32" 
+        height="32" 
+        viewBox="0 0 24 24" 
+        fill="none"
+        stroke="#10b981"
+        stroke-width="2" 
+        stroke-linecap="round"
+        stroke-linejoin="round" 
+        class="lucide lucide-circle-check">
+        <circle cx="12" cy="12" r="10"/>
+        <circle cx="12" cy="12" r="11" stroke="#10b981" stroke-width="2" stroke-opacity="0.3" />
+        <path d="m9 12 2 2 4-4"/>
+    </svg>
+    <h1>All Services are online!</h1>
+    {% if services[-1].last_metric.timestamp %}
+    <p>Last updated on {{ services[-1].last_metric.timestamp }} UTC</p>
+    {% endif %}
+</header>
+<main>
+    {% for service in services %}
+        <div class="service">
+            <div class="service-header">
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                    width="16" 
+                    height="16" 
+                    viewBox="0 0 24 24" 
+                    fill="none"
+                    stroke="#10b981"
+                    stroke-width="2" 
+                    stroke-linecap="round"
+                    stroke-linejoin="round" 
+                    class="lucide lucide-circle-check">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="12" r="11" stroke="#10b981" stroke-width="2" stroke-opacity="0.3" />
+                    <path d="m9 12 2 2 4-4"/>
+                </svg>
+                <h3>{{ service.service.display_name }}</h3>
+                {% if service.last_metric.timestamp %}
+                <p>Last updated on {{ service.last_metric.timestamp }} UTC</p>
+                {% endif %}
+            </div>
+            <div class="service-content">
+                <div class="metrics">
+                {% for metric in service.metrics %}
+                    {% if metric.code == 200 %}
+                    {% if loop.first %}
+                    <div class="metric first green" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                    {% elif loop.last and metrics|length == 90 %}
+                    <div class="metric last green" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                    {% else %}
+                    <div class="metric green" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                    {% endif %}
+                    {% else %}
+                    {% if loop.first %}
+                    <div class="metric first red" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                    {% elif loop.last and metrics|length == 90 %}
+                    <div class="metric last red" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                    {% else %}
+                    <div class="metric red" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                    {% endif %}
+                    {% endif %}
+                {% endfor %}
+                {% for _ in range(90 - service.metrics|length) %}
+                    {% if loop.first and service.metrics|length == 0 %}
+                    <div class="metric first grey"></div>
+                    {% else %}
+                    <div class="metric grey"></div>
+                    {% endif %}
+                    {% if loop.last %}
+                    <div class="metric last grey"></div>
+                    {% endif %}
+                {% endfor %}
                 </div>
             </div>
-        {% endfor %}
-    </main>
-    <footer>
-
-    </footer>
-</body>
-</html>
+        </div>
+    {% endfor %}
+</main>
+{% endblock content %}
