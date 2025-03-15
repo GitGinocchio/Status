@@ -45,6 +45,5 @@ jobs:
               echo "Nessun cambiamento rilevato, niente da aggiornare."
           else
               git commit -m "Updated services status"
-              git push origin data
+              git push origin main
           fi
-        working-directory: data
