@@ -108,30 +108,30 @@ main {
     width: 100%;
 }
 
-main .service {
+.service {
     margin: 20px;
     padding: 5px;
     border-bottom: 3px solid #babbbf;
     border-radius: 8px;
 }
 
-main .service-header {
+.service-header {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 10px;
 }
 
-main .service-header p {
+.service-header p {
     color: #8a91a5;
     font-size: 13px;
 }
 
-main .service-content {
+.service-content {
 
 }
 
-main .metrics {
+.metrics {
     display: flex;
     flex-direction: row;
     gap: 1px;
@@ -142,6 +142,12 @@ main .metrics {
     width: 10px;
     height: 32px;
     border-radius: 1px;
+    transition: filter 0.2s ease;
+}
+
+.metric:hover {
+    filter: brightness(0.8);
+    cursor: pointer;
 }
 
 .first {
@@ -166,33 +172,17 @@ main .metrics {
     background-color: #15181c;
 }
 
-/* Add this CSS styles to make the popup appear */
-#popup-container {
+.tooltip {
     position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-  }
-  
-  .popup-content {
-    padding: 20px;
-    width: 400px;
-    height: 300px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  .popup-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .popup-body {
-    padding: 20px;
-  }
+    background-color: rgba(13, 21, 30, 0.95); /* Colore scuro in linea con il background */
+    text-align: left;
+    color: white;
+    padding: 6px 10px;
+    border: 1px solid #21242d;
+    border-radius: 4px;
+    font-size: 12px;
+    z-index: 1000;
+    pointer-events: none; /* Permette di passare il mouse attraverso il tooltip */
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}

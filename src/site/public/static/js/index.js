@@ -1,29 +1,31 @@
-function showPopup(event, data) {
-    const popupContainer = document.getElementById('popup-container');
+// Funzione per mostrare il tooltip
+function showPopup(event, metric) {
+    // Rimuove eventuali tooltip esistenti
+    hidePopup();
 
-    const popupContent = document.createElement('div');
-    popupContent.innerHTML = `
-    <div class="popup-header">
-        <h2>Metrics</h2>
-    </div>
-    <div class="popup-body">
-        <p>Status: ${data.status}</p>
-        <p>Code: ${data.code}</p>
-        <p>Latency: ${data.latency} seconds</p>
-    </div>
-    `;
+    // Crea l'elemento tooltip
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tooltip';
 
-    // Add the popup content to the container
-    popupContainer.childNodes.forEach(child => child.remove());
-    popupContainer.appendChild(popupContent);
+    // Prepara il contenuto: status e timestamp;
+    tooltip.innerHTML = `<strong>Status:</strong> ${metric.status}<br>
+                         <strong>Code:</strong> ${metric.code}<br>
+                         ${metric.latency ? `<strong>Latency:<strong> ${metric.latency} seconds<br>` : "" }
+                         <strong>Timestamp:</strong> ${metric.timestamp}<br>
+                         `;
 
-    // Show the popup
-    popupContainer.style.display = 'block';
+    // Posiziona il tooltip appena sotto il cursore con un offset di 10px
+    tooltip.style.left = (event.clientX + 10) + 'px';
+    tooltip.style.top = (event.clientY + 25) + 'px';
 
+    // Aggiungi il tooltip al body in modo da non essere influenzato da altri contenitori
+    document.body.appendChild(tooltip);
 }
 
-function hidePopup(event) {
-    const popupContainer = document.getElementById('popup-container');
-    popupContainer.style.display = 'none';
-    popupContainer.childNodes.forEach(child => child.remove());
+// Funzione per rimuovere il tooltip
+function hidePopup() {
+    const tooltip = document.querySelector('.tooltip');
+    if (tooltip) {
+        tooltip.remove();
+    }
 }
