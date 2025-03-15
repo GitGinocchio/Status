@@ -1,4 +1,4 @@
-name: Get Services Status
+name: Update Services Status
 
 on:
   schedule:
