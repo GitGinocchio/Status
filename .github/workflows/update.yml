@@ -1,8 +1,8 @@
 name: Update Services Status
 
 on:
-  schedule:
-    - cron: '0 0/1 * * *' # See https://crontab.guru/#0_0/2_*_*_* for help
+  #schedule:
+    #- cron: '0 0/1 * * *' # See https://crontab.guru/#0_0/2_*_*_* for help
 
   workflow_dispatch: # Permette l'avvio manuale del workflow
 
