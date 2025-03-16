@@ -11,6 +11,8 @@
 #### Varie
 - [ ] Capire come funziona la pagina 404 di github pages
 
+- [ ] Oltre all'endpoint del servizio, dovrei inserire anche l'indirizzo per gli utenti che vogliono andare nella home page del sito
+- [ ] Sostituire endpoint di GGsBot da ggsbot.ginocchio.workers.dev al link di bot-hosting.net (per evitare di fare una query al worker di cloudflare)
 
 - [ ] Strutturare questa feature fornita da chatgpt
 
