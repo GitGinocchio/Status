@@ -12,7 +12,8 @@ loader = FileSystemLoader(templates_dir)
 env = Environment(loader=loader, autoescape=True, trim_blocks=True, lstrip_blocks=True)
 
 def relative_url(filename : str, base : str):
-    if not base:  return '.' + normpath(filename)
+    normalized = normpath(filename)
+    if not base: return normalized if filename.startswith((".")) else "." + normalized
     return relpath(filename,base)
 
 templates = loader.list_templates()
