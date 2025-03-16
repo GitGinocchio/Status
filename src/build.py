@@ -19,8 +19,8 @@ def main():
 
     build_page('index.html', services=services)
 
-    build_page('events.html')
-    build_page('reports.html')
+    build_page('/events/index.html')
+    build_page('/reports/index.html')
 
     db.disconnect()
 
