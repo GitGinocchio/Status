@@ -19,12 +19,9 @@ def main():
 
     build_page('index.html', services=services)
 
+    build_page('events.html')
+    build_page('reports.html')
 
-    """
-    print(templates)
-    for template_name in templates:
-        build_page(template_name)"
-    """
     db.disconnect()
 
 if __name__ == "__main__":

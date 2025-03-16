@@ -14,6 +14,8 @@ function showPopup(event, metric) {
             <strong>Status:</strong> ${metric.status}<br>
             <strong>Code:</strong> ${metric.code}<br>
             ${metric.latency ? `<strong>Latency:</strong> ${metric.latency} seconds<br>` : "" }
+            ${metric.min_latency ? `<strong>Min Latency:</strong> ${metric.min_latency} seconds<br>` : "" }
+            ${metric.max_latency ? `<strong>Max Latency:</strong> ${metric.max_latency} seconds<br>` : "" }
         </div>
         <div class="tooltip-footer">
             <strong>${metric.timestamp}</strong>
