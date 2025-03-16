@@ -29,8 +29,10 @@
         <path d="m9 12 2 2 4-4"/>
     </svg>
     <h1>All Services are online!</h1>
-    {% if services[-1].last_metric.timestamp %}
+    {% if services | length > 0 %}
     <p>Last updated on {{ services[-1].last_metric.timestamp }} UTC</p>
+    {% else %}
+    <p>No last update date.</p>
     {% endif %}
 </header>
 <main>
@@ -91,5 +93,8 @@
             </div>
         </div>
     {% endfor %}
+    {% if services | length == 0 %}
+    <p>No services are online!</p>
+    {% endif %}
 </main>
 {% endblock content %}

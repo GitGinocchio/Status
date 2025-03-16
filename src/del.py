@@ -6,7 +6,7 @@ db = Database()
 
 
 with db:
-    name = "Google"
+    name = "google"
 
     if db.hasService(name):
         db.delService(name)
