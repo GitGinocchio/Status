@@ -22,6 +22,8 @@ def main():
     build_page('/events/index.html')
     build_page('/reports/index.html')
 
+    build_page('/404/index.html')
+
     db.disconnect()
 
 if __name__ == "__main__":
