@@ -37,28 +37,31 @@
 </header>
 <main>
     {% for service in services %}
-        <div class="service">
-            <div class="service-header">
-                <svg xmlns="http://www.w3.org/2000/svg" 
-                    width="16" 
-                    height="16" 
-                    viewBox="0 0 24 24" 
-                    fill="none"
-                    stroke="#10b981"
-                    stroke-width="2" 
-                    stroke-linecap="round"
-                    stroke-linejoin="round" 
-                    class="lucide lucide-circle-check">
-                    <circle cx="12" cy="12" r="10"/>
-                    <circle cx="12" cy="12" r="11" stroke="#10b981" stroke-width="2" stroke-opacity="0.3" />
-                    <path d="m9 12 2 2 4-4"/>
-                </svg>
-                <h3>{{ service.service.display_name }}</h3>
+        <div class="service {% if loop.last %}last{% endif %}">
+            <div class="header">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" 
+                        width="16" 
+                        height="16" 
+                        viewBox="0 0 24 24" 
+                        fill="none"
+                        stroke="#10b981"
+                        stroke-width="2" 
+                        stroke-linecap="round"
+                        stroke-linejoin="round" 
+                        class="lucide lucide-circle-check">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="11" stroke="#10b981" stroke-width="2" stroke-opacity="0.3" />
+                        <path d="m9 12 2 2 4-4"/>
+                    </svg>
+                    <h3>{{ service.service.display_name }}</h3>
+                    <a href="{{ service.service.endpoint }}" target="_blank">{{ service.service.endpoint.split('//', 1)[-1] }}</a>
+                </div>
                 {% if service.last_metric.timestamp %}
                 <p>Last updated on {{ service.last_metric.timestamp }} UTC</p>
                 {% endif %}
             </div>
-            <div class="service-content">
+            <div class="content">
                 <div class="metrics">
                 {% for metric in service.metrics %}
                     {% if metric.code == 200 %}

@@ -13,20 +13,47 @@ main {
     border-bottom: 1px solid #21242d;
 }
 
-.service-header {
+.service.last {
+    border-bottom: none;
+}
+
+.service .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.service .header div { 
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 10px;
 }
 
-.service-header p {
-    color: #8a91a5;
-    font-size: 13px;
+.service .header div a {
+    display: inline-block;
+    background-color: #21242d; /* Colore di sfondo scuro */
+    color: white; /* Testo bianco */
+    font-weight: 600;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 10px; /* Angoli arrotondati */
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
 }
 
-.service-content {
+.service .header div a:hover {
+    background-color: #2a2d38; /* Colore leggermente più chiaro al passaggio */
+}
 
+.service .header p {
+    color: #8a91a5;
+    font-size: 13px;
+    font-weight: 500;
 }
 
 .metrics {
@@ -48,27 +75,29 @@ main {
     cursor: pointer;
 }
 
-.first {
+.metric.first {
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
 }
 
-.last {
+.metric.last {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
 
-.green {
+.metric.green {
     background-color: #10b981;
 }
 
-.red {
+.metric.red {
     background-color: var(--error-color);
 }
 
-.grey {
+.metric.grey {
     background-color: #15181c;
 }
+
+/* Tooltip */
 
 .tooltip {
     display: flex;
@@ -90,13 +119,38 @@ main {
     width: 200px;
 }
 
-.tooltip-content {
+.tooltip.hidden {
+    display: none;
+}
+
+.tooltip .content {
     border-bottom: 1px solid #2d313c;
     padding-bottom: 5px;
     gap: 5px;
 }
 
-.tooltip-footer {
+.tooltip .footer {
     text-align: center;
     padding-top: 5px;
+}
+
+@keyframes skeleton-blink {
+    0% {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+    100% {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+}
+
+.tooltip span.skeleton {
+    display: inline-block;
+    width: 90px; /* Simula la dimensione del testo */
+    height: 10px; /* Altezza fissa per uniformità */
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.2);
+    animation: skeleton-blink 0.8s ease-in-out;
 }
