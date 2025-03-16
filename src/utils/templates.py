@@ -13,7 +13,7 @@ env = Environment(loader=loader, autoescape=True, trim_blocks=True, lstrip_block
 
 def relative_url(filename : str, base : str):
     normalized = normpath(filename)
-    if not base: return normalized if filename.startswith((".")) else "." + normalized
+    if not base or base == '/404': return normalized if filename.startswith((".")) else "." + normalized
     return relpath(filename,base)
 
 templates = loader.list_templates()
