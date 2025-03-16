@@ -26,6 +26,9 @@ function showPopup(event, metric) {
     </div>
     `;
 
+    // tooltip.innerHTML = skeletonContent;
+    // clearTimeout(realContentTimeout);
+
     const realContent = `
     <div>
         <div class="content">
@@ -42,9 +45,9 @@ function showPopup(event, metric) {
     </div>
     `;
 
-    tooltip.innerHTML = skeletonContent;
-    clearTimeout(realContentTimeout);
-    realContentTimeout = setTimeout(() => { tooltip.innerHTML = realContent; }, 300);
+    // realContentTimeout = setTimeout(() => { tooltip.innerHTML = realContent; }, 300);
+
+    tooltip.innerHTML = realContent;
 
     // Posiziona il tooltip appena sotto il cursore con un offset di 10px
     tooltip.style.left = (event.clientX + 10) + 'px';
