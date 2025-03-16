@@ -3,12 +3,12 @@
 {% block title %}Status | Home{% endblock title %}
 
 {% block style %}
-<link rel="stylesheet" href="./static/css/index.css">
+<link rel="stylesheet" href="{{ relative_url('/static/css/index.css') }}">
 {% endblock style %}
 
 
 {% block script %}
-<script src="./static/js/index.js"></script>
+<script src="{{ relative_url('/static/js/index.js') }}"></script>
 {% endblock script %}
 
 
