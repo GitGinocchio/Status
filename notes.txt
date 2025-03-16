@@ -1,3 +1,0 @@
-PYTHON:
-- Creare la struttura del database
-
