@@ -9,19 +9,25 @@
     <script src="..\static\js\template.js"></script>
 
 <script src="..\static\js\service.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+<script src="..\static\css\service.css"></script>
 </head>
 <body>
     <nav>
         <h3>Status</h3>
         <div>
             <ul>
-                <li><a href="/Status">Home</a></li>
-                <li><a href="/Status/events">Events</a></li>
-                <li><a href="/Status/reports">Reports</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/events">Events</a></li>
+                <li><a href="/reports">Reports</a></li>
             </ul>
         </div>
         <p></p>
     </nav>
+<main>
+    <canvas id="ServiceChart" width="700px" height="400px"></canvas>
+</main>
     <footer>
 
     </footer>

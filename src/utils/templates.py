@@ -20,7 +20,10 @@ templates = loader.list_templates()
 
 def build_page(template_name: str, **kwargs):
     template = env.get_template(template_name)
-    page = template.render(**kwargs, relative_url=partial(relative_url, base=dirname(template_name)))
+    page = template.render(**kwargs, 
+                           relative_url=partial(relative_url, base=dirname(template_name)),
+                           default_route='/Status'
+    )
 
     template_path = f"{build_dir}/{template_name}"
 

@@ -1,3 +1,5 @@
+from argparse import ArgumentParser
+
 from utils.templates import build_page, templates
 from utils.db import Database
 
@@ -28,4 +30,9 @@ def main():
     db.disconnect()
 
 if __name__ == "__main__":
+    #parser = ArgumentParser(description="Build the Status website using templates and database data.")
+    #parser.add_argument('--site-default-route', default='/Status', help='Default route for the site (Warning: must match the github pages route)')
+
+    #args = parser.parse_args()
+
     main()

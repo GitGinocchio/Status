@@ -61,7 +61,7 @@
                 <p>Last updated on {{ service.last_metric.timestamp }} UTC</p>
                 {% endif %}
             </div>
-            <a href="/Status/service?name={{ service.service.name }}">
+            <a href="/service?name={{ service.service.name }}">
                 <div class="content">
                     <div class="metrics">
                     {% for metric in service.metrics %}
