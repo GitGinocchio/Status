@@ -61,39 +61,41 @@
                 <p>Last updated on {{ service.last_metric.timestamp }} UTC</p>
                 {% endif %}
             </div>
-            <div class="content">
-                <div class="metrics">
-                {% for metric in service.metrics %}
-                    {% if metric.code == 200 %}
-                    {% if loop.first %}
-                    <div class="metric first green" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
-                    {% elif loop.last and metrics|length == 90 %}
-                    <div class="metric last green" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
-                    {% else %}
-                    <div class="metric green" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
-                    {% endif %}
-                    {% else %}
-                    {% if loop.first %}
-                    <div class="metric first red" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
-                    {% elif loop.last and metrics|length == 90 %}
-                    <div class="metric last red" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
-                    {% else %}
-                    <div class="metric red" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
-                    {% endif %}
-                    {% endif %}
-                {% endfor %}
-                {% for _ in range(90 - service.metrics|length) %}
-                    {% if loop.first and service.metrics|length == 0 %}
-                    <div class="metric first grey"></div>
-                    {% else %}
-                    <div class="metric grey"></div>
-                    {% endif %}
-                    {% if loop.last %}
-                    <div class="metric last grey"></div>
-                    {% endif %}
-                {% endfor %}
+            <a href="/Status/service?name={{ service.service.name }}">
+                <div class="content">
+                    <div class="metrics">
+                    {% for metric in service.metrics %}
+                        {% if metric.code == 200 %}
+                        {% if loop.first %}
+                        <div class="metric first green" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                        {% elif loop.last and metrics|length == 90 %}
+                        <div class="metric last green" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                        {% else %}
+                        <div class="metric green" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                        {% endif %}
+                        {% else %}
+                        {% if loop.first %}
+                        <div class="metric first red" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                        {% elif loop.last and metrics|length == 90 %}
+                        <div class="metric last red" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                        {% else %}
+                        <div class="metric red" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
+                        {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% for _ in range(90 - service.metrics|length) %}
+                        {% if loop.first and service.metrics|length == 0 %}
+                        <div class="metric first grey"></div>
+                        {% else %}
+                        <div class="metric grey"></div>
+                        {% endif %}
+                        {% if loop.last %}
+                        <div class="metric last grey"></div>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     {% endfor %}
     {% if services | length == 0 %}

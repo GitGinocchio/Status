@@ -18,6 +18,7 @@ def main():
         })
 
     build_page('index.html', services=services)
+    build_page('/service/index.html')
 
     build_page('/events/index.html')
     build_page('/reports/index.html')
