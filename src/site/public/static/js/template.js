@@ -16,7 +16,7 @@ function replaceHrefInDevelopmentMode() {
             link.href = `${defaultRoute}${pathname}`
         }
 
-        console.log("defaultRoute: ", defaultRoute, "href (before): ", before, "href (after): ", link.href)
+        console.log("defaultRoute: ", defaultRoute, "href (before): ", before, "href (after): ", link.href);
     }
 }
 
