@@ -18,7 +18,7 @@ async function queryDatabase() {
         name = "syncify"
     }
 
-    const db = await loadDatabase(`/data/database.db`);
+    const db = await loadDatabase(`https://github.com/GitGinocchio/Status/raw/refs/heads/main/data/database.db`);
 
     const stmt = db.prepare("SELECT * FROM metrics WHERE name = ?");
     stmt.bind([name]);
