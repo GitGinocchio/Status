@@ -7,6 +7,7 @@ async function loadDatabase(path) {
 
 async function queryDatabase() {
     const urlParams = new URLSearchParams(window.location.search);
+    let basePath = "/" + window.location.pathname.split("/")[1];
     let name = urlParams.get("name");
 
     if (!name) {
@@ -17,7 +18,7 @@ async function queryDatabase() {
     }
 
     // Carica i dati dal file JSON
-    const data = await loadDatabase(`./data/database.json`);
+    const data = await loadDatabase(`${window.location.origin}${basePath}/data/database.json`);
 
     // Filtra i dati in base al nome
     const rows = data.metrics.filter(entry => entry.name === name);

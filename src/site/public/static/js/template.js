@@ -6,7 +6,7 @@ function replaceHrefInProductionMode() {
     }
 
     // Ottieni solo la prima directory dopo il dominio
-    let basePath = "/" + window.location.pathname.split("/")[1]; 
+    let basePath = "/" + window.location.pathname.split("/")[1];
 
     links.forEach(link => {
         let href = link.getAttribute("href");
@@ -19,5 +19,5 @@ function replaceHrefInProductionMode() {
 }
 
 document.addEventListener("DOMContentLoaded", function() { 
-    replaceHrefInDevelopmentMode();
+    replaceHrefInProductionMode();
 });
