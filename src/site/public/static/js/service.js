@@ -1,11 +1,8 @@
 async function loadDatabase(path) {
-    const SQL = await initSqlJs({ locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}` });
-
     const response = await fetch(path);
-    const buffer = await response.arrayBuffer();
-    const db = new SQL.Database(new Uint8Array(buffer));
+    const data = await response.json();  // Carica i dati JSON
 
-    return db;
+    return data;  // Restituisce i dati JSON
 }
 
 async function queryDatabase() {
@@ -14,26 +11,22 @@ async function queryDatabase() {
 
     if (!name) {
         console.log("Parametro 'name' non fornito");
-        //return;
-        name = "syncify"
+        name = "syncify"; // Imposta un valore di default
+        // Qui si potrebbe chiedere all'utente di inserire il nome di un servizio
+        // Si potrebbe fare una box con le scelte dei servizi disponibili...
     }
 
-    const db = await loadDatabase(`https://github.com/GitGinocchio/Status/raw/refs/heads/main/data/database.db`);
+    // Carica i dati dal file JSON
+    const data = await loadDatabase(`./data/database.json`);
 
-    const stmt = db.prepare("SELECT * FROM metrics WHERE name = ?");
-    stmt.bind([name]);
+    // Filtra i dati in base al nome
+    const rows = data.metrics.filter(entry => entry.name === name);
 
-    let rows = [];
-    while (stmt.step()) {
-        const row = stmt.getAsObject();
-        rows.push(row);
-    };
-
-    stmt.free();
-
+    // Estrai le etichette (timestamp) e le latenze
     const labels = rows.map(entry => new Date(entry.timestamp).toLocaleTimeString());
     const latencies = rows.map(entry => entry.latency);
 
+    // Crea il grafico
     const ctx = document.getElementById("ServiceChart").getContext("2d");
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
     gradient.addColorStop(0, "rgba(54, 162, 235, 0.6)");
@@ -53,7 +46,7 @@ async function queryDatabase() {
                     fill: true,
                     pointRadius: 5,
                     pointBackgroundColor: "rgba(54, 162, 235, 1)",
-                    tension: 0.3 // Per curve più fluide
+                    tension: 0.3
                 }
             ]
         },
