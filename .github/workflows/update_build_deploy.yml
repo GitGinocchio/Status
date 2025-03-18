@@ -95,12 +95,12 @@ jobs:
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./src/site/public
-          destination: ./src/site/build
+          destination: ./src/site/public
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./src/site/build
+          path: ./src/site/public
 
   # Deployment job
   deploy:
