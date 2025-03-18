@@ -7,7 +7,10 @@ async function loadDatabase(path) {
 
 async function queryDatabase() {
     const urlParams = new URLSearchParams(window.location.search);
-    let basePath = "/" + window.location.pathname.split("/")[1];
+
+    let basePath = window.location.hostname.includes("127.0.0.1") || window.location.hostname.includes("localhost") ? 
+                    '' : "/" + window.location.pathname.split("/")[1];
+
     let name = urlParams.get("name");
 
     if (!name) {
