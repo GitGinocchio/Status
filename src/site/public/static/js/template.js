@@ -5,13 +5,13 @@ function replaceHrefInProductionMode() {
         return; // Se siamo in sviluppo, non fare nulla
     }
 
-    let pathSegments = window.location.pathname.split("/").filter(seg => seg.length > 0);
-    let basePath = pathSegments.length > 0 ? `/${pathSegments[0]}` : "";
+    // Ottieni solo la prima directory dopo il dominio
+    let basePath = "/" + window.location.pathname.split("/")[1]; 
 
     links.forEach(link => {
         let href = link.getAttribute("href");
 
-        // Se il link inizia con "/" e non ha già il basePath, aggiungilo
+        // Se il link inizia con "/" (quindi è relativo) e non ha già basePath
         if (href.startsWith("/") && !href.startsWith(basePath)) {
             link.setAttribute("href", basePath + href);
         }
