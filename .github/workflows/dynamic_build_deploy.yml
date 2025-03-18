@@ -73,7 +73,7 @@ jobs:
           done
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-artifact@v3
         if: env.files != ''
         with:
           path: ./src/site/public
