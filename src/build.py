@@ -2,6 +2,7 @@ from argparse import ArgumentParser
 
 from utils.templates import build_page, templates
 from utils.db import Database
+import os
 
 db = Database()
 
@@ -26,6 +27,8 @@ def main():
     build_page('/reports/index.html')
 
     build_page('/404/index.html')
+
+    db.exportToJSON('./src/site/public/data/database.json')
 
     db.disconnect()
 

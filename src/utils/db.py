@@ -1,6 +1,7 @@
 from datetime import datetime, timezone
 from typing import Any
 import sqlite3
+import json
 
 from utils.config import config
 from utils.queries import *
@@ -61,6 +62,28 @@ class Database:
     def executeQuery(self, query : str, params : tuple | list = ()) -> sqlite3.Cursor:
         logger.debug(f'Executing query: {query} with params: {params}')
         return self.cursor.execute(query, params)
+
+    def exportToJSON(self, filename : str):
+        try:
+            cursor = self.executeQuery("SELECT name FROM sqlite_master WHERE type='table';")
+            tables = cursor.fetchall()
+
+            json_data = {}
+
+            # Esporta i dati di ogni tabella in formato JSON
+            for table in tables:
+                table_name = table[0]
+                cursor.execute(f"SELECT * FROM {table_name};")
+                rows = cursor.fetchall()
+
+                columns = [description[0] for description in cursor.description]
+                table_data = [dict(zip(columns, row)) for row in rows]
+                json_data[table_name] = table_data
+
+            with open(filename, 'w') as f:
+                json.dump(json_data, f, indent='\t')
+        
+        except sqlite3.IntegrityError as e: raise e
 
     # Services
 
