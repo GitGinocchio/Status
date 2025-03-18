@@ -54,27 +54,23 @@ jobs:
       - name: Detect modified files
         id: changes
         run: |
-          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '\.md|\.html|\.js|\.css' || true)
-          echo "files=$CHANGED_FILES" >> $GITHUB_ENV
-          echo $CHANGED_FILES
+            CHANGED_FILES=$(git diff --name-only HEAD | grep -E '\.md|\.html|\.js|\.css' || true)
+            echo "files=$CHANGED_FILES" >> $GITHUB_ENV
+            echo $CHANGED_FILES
 
       - name: Build only modified files
         if: env.files != ''
         run: |
-          for file in $files; do
-            jekyll build --source $(dirname $file) --destination ./src/site/public/$(dirname $file)
-          done
+            for file in $files; do
+                jekyll build --source $(dirname $file) --destination ./src/site/public/$(dirname $file)
+            done
 
-      - name: List files before upload
-        run: |
-          ls -R ./src/site/public
-
-      #- name: Upload artifact
-        #uses: actions/upload-artifact@v3
-        #if: env.files != ''
-        #with:
-          #name: github-pages
-          #path: ./src/site/public
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        if: env.files != ''
+        with:
+          name: github-pages
+          path: ./src/site/public
 
   # Deployment job
   deploy:
