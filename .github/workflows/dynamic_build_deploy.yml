@@ -65,13 +65,6 @@ jobs:
             jekyll build --source $(dirname $file) --destination ./src/site/public/$(dirname $file)
           done
 
-      - name: Deploy only modified files
-        if: env.files != ''
-        run: |
-          for file in $files; do
-            cp -r ./src/site/public/$(dirname $file)/* ./src/site/public/
-          done
-
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         if: env.files != ''
