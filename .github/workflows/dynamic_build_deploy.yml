@@ -76,7 +76,6 @@ jobs:
         uses: actions/upload-artifact@v3
         if: env.files != ''
         with:
-          name: jekyll-site
           path: ./src/site/public
 
   # Deployment job
