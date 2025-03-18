@@ -69,12 +69,12 @@ jobs:
         run: |
           ls -R ./src/site/public
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        if: env.files != ''
-        with:
-          name: github-pages
-          path: ./src/site/public
+      #- name: Upload artifact
+        #uses: actions/upload-artifact@v3
+        #if: env.files != ''
+        #with:
+          #name: github-pages
+          #path: ./src/site/public
 
   # Deployment job
   deploy:
