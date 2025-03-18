@@ -29,8 +29,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout Main Branch
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Setup Ruby and Jekyll
         uses: ruby/setup-ruby@v1
@@ -70,7 +72,7 @@ jobs:
         if: env.files != ''
         with:
           name: github-pages
-          path: ./src/site/public
+          path: ./src/site/build
 
   # Deployment job
   deploy:
