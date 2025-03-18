@@ -65,6 +65,10 @@ jobs:
             jekyll build --source $(dirname $file) --destination ./src/site/public/$(dirname $file)
           done
 
+      - name: List files before upload
+        run: |
+          ls -R ./src/site/public
+
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         if: env.files != ''
