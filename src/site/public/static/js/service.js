@@ -72,9 +72,12 @@ document.addEventListener('DOMContentLoaded', async function () {
     const urlParams = new URLSearchParams(window.location.search);
     let name = urlParams.get("name");
 
-    if (name) { 
+    if (name) {
         graphs.classList.remove("hidden");
         services_dropdown.classList.add("hidden");
         await showGraphs(name);
+    }
+    else { 
+        services_dropdown.classList.remove("hidden");
     }
 });

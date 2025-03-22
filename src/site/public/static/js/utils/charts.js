@@ -1,5 +1,5 @@
 function getRadiusByDeviceWidth() {
-    return (window.innerWidth / 1920) * 2.5;
+    return (window.innerWidth / 1920) * 2;
 }
 
 function getBorderWidthByDeviceWidth() {
@@ -7,11 +7,12 @@ function getBorderWidthByDeviceWidth() {
 }
 
 function getFontSizeByDeviceWidth() {
+    console.log(window.innerWidth, window.outerWidth);
     return (window.innerWidth / 1920) * 12;
 }
 
 function getBorderDashByDeviceWidth() {
-    return [(window.innerWidth / 1920) * 2.5, (window.innerWidth / 1920) * 2.5];
+    return [(window.innerWidth / 1920) * 2, (window.innerWidth / 1920) * 2];
 }
 
 export function getLatencyGraphConfig(ctx, data) {
@@ -26,9 +27,9 @@ export function getLatencyGraphConfig(ctx, data) {
             maintainAspectRatio: true,
             animation: { duration: 500 },
             interaction: {
-                axis: "x",
-                mode : window.innerWidth  < 1000 ? "x" : "point", 
-                intersect: true, 
+                axis: "xy",
+                mode : "index",
+                intersect: false, 
             },
             scales: {
                 x: {
@@ -64,9 +65,6 @@ export function getLatencyGraphConfig(ctx, data) {
                     },
                 }
                 
-            },
-            tooltip: {
-                position: 'nearest',
             }
         },
         data: {
@@ -105,11 +103,11 @@ export function getLatencyGraphConfig(ctx, data) {
                     borderColor: "rgba(54, 162, 235, 1)",
                     backgroundColor: gradient,
                     borderWidth: getBorderWidthByDeviceWidth(),
-                    fill: true,
                     pointRadius: getRadiusByDeviceWidth(),
                     pointBackgroundColor: "rgba(54, 162, 235, 1)",
                     cubicInterpolationMode: 'monotone',
-                    tension: 0.3
+                    tension: 0.3,
+                    fill: true
                 }
             ]
         },

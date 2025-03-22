@@ -15,7 +15,7 @@
 
 {% block content %}
 <main>
-    <div id="services-dropdown">
+    <div id="services-dropdown" class="hidden">
         <label for="services">Choose a service:</label>
         <select id="services" name="service">
             <option value="">None</option>
@@ -26,10 +26,10 @@
         <button id="services-button">Submit</button>
     </div>
     <div id="graphs" class="hidden">
-        <h3>Uptime percentage over time</h3>
-        <canvas id="UptimePercentageChart" class="graph"></canvas>
         <h3>Latency over time</h3>
         <canvas id="LatencyChart" class="graph"></canvas>
+        <h3>Uptime percentage over time</h3>
+        <canvas id="UptimePercentageChart" class="graph"></canvas>
     </div>
 </main>
 {% endblock content %}
