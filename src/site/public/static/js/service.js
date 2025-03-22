@@ -29,10 +29,6 @@ async function showGraphs(service_name) {
         }
     ));
 
-    if (window.innerWidth < 500) {
-        chart.zoom(0.1)
-    }
-
     // Reset zoom al doppio tap su mobile
     let lastTap = 0;
     canvas.addEventListener("touchend", (event) => {
