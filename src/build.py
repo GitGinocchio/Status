@@ -10,18 +10,20 @@ db = Database()
 def main(): 
     db.connect()
 
-    services = []
-    for service in db.getServices():
+    services = db.getServices()
+
+    service_metrics = []
+    for service in services:
         metrics = db.getMetricsByName(service['name'])[-90:]
 
-        services.append({
+        service_metrics.append({
             'service' : service, 
             'metrics' : metrics, 
             'last_metric' : metrics[-1] if len(metrics) > 0 else None
         })
 
-    build_page('index.html', services=services)
-    build_page('/service/index.html')
+    build_page('index.html', services=service_metrics)
+    build_page('/service/index.html', services=services)
 
     build_page('/events/index.html')
     build_page('/reports/index.html')

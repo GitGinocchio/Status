@@ -1,12 +1,11 @@
+import { getBasePath } from './utils/commons.js';
+
 function replaceHrefInProductionMode() {
+    const basePath = getBasePath();
+
+    if (basePath === '') { return; }
+
     let links = document.querySelectorAll('a[href]');
-
-    if (window.location.hostname.includes("127.0.0.1") || window.location.hostname.includes("localhost")) {
-        return; // Se siamo in sviluppo, non fare nulla
-    }
-
-    // Ottieni solo la prima directory dopo il dominio
-    let basePath = "/" + window.location.pathname.split("/")[1];
 
     links.forEach(link => {
         let href = link.getAttribute("href");

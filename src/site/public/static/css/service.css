@@ -1,4 +1,69 @@
-main #ServiceChart {
-    width: 100% !important;
-    height: 100% !important;
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    height: 95vh;
+}
+
+#services-dropdown {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    margin: 0 auto;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#services-dropdown label {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 10px;
+    display: block;
+}
+
+#services {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+#services:hover {
+    border-color: #007bff;
+}
+
+.hidden {
+    display: none;
+}
+
+#graphs {
+    margin-top: 30px;
+    text-align: center;
+    max-width: inherit;
+}
+
+.graph {
+    width: 100%                  !important;
+    height: 50%                  !important;
+}
+
+/* For large mobile screens */
+@media only screen and (min-width: 600px) and (max-width: 1200px) {
+    .graph {
+        width: 100vw                 !important;
+    }
+}
+
+@media only screen and (min-width: 200px) and (max-width: 600px){
+    .graph {
+        width: 100vw                 !important;
+        height: 45vh                  !important;
+    }
 }

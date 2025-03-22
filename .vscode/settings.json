@@ -1,3 +1,4 @@
 {
     "liveServer.settings.root": "/src/site/public",
+    "liveServer.settings.useLocalIp" : true
 }

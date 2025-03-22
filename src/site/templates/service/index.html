@@ -10,11 +10,26 @@
 <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
-<script src="{{ relative_url('/static/js/service.js') }}"></script>
+<script type="module" src="{{ relative_url('/static/js/service.js') }}"></script>
 {% endblock script %}
 
 {% block content %}
 <main>
-    <canvas id="ServiceChart" width="700px" height="400px"></canvas>
+    <div id="services-dropdown">
+        <label for="services">Choose a service:</label>
+        <select id="services" name="service">
+            <option value="">None</option>
+            {% for service in services %}
+                <option value="{{ service.name }}">{{ service.display_name }}</option>
+            {% endfor %}
+        </select>
+        <button id="services-button">Submit</button>
+    </div>
+    <div id="graphs" class="hidden">
+        <h3>Uptime percentage over time</h3>
+        <canvas id="UptimePercentageChart" class="graph"></canvas>
+        <h3>Latency over time</h3>
+        <canvas id="LatencyChart" class="graph"></canvas>
+    </div>
 </main>
 {% endblock content %}

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock title %}</title>
     <link rel="stylesheet" href="{{ relative_url('/static/css/template.css') }}">
-    <script src="{{ relative_url('/static/js/template.js')}}"></script>
+    <script type="module" src="{{ relative_url('/static/js/template.js')}}"></script>
 
     {% block script %}{% endblock script %}
     {% block style %}{% endblock style %}

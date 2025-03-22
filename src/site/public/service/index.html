@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Status | Service</title>
     <link rel="stylesheet" href="..\static\css\template.css">
-    <script src="..\static\js\template.js"></script>
+    <script type="module" src="..\static\js\template.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
-<script src="..\static\js\service.js"></script>
+<script type="module" src="..\static\js\service.js"></script>
 <link rel="stylesheet" href="..\static\css\service.css">
 </head>
 <body>
@@ -27,7 +27,21 @@
         <p></p>
     </nav>
 <main>
-    <canvas id="ServiceChart" width="700px" height="400px"></canvas>
+    <div id="services-dropdown">
+        <label for="services">Choose a service:</label>
+        <select id="services" name="service">
+            <option value="">None</option>
+                <option value="syncify">Syncify</option>
+                <option value="ggsbot">GGsBot</option>
+        </select>
+        <button id="services-button">Submit</button>
+    </div>
+    <div id="graphs" class="hidden">
+        <h3>Uptime percentage over time</h3>
+        <canvas id="UptimePercentageChart" class="graph"></canvas>
+        <h3>Latency over time</h3>
+        <canvas id="LatencyChart" class="graph"></canvas>
+    </div>
 </main>
     <footer>
 

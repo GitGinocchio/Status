@@ -28,6 +28,7 @@ body {
 /* Navbar */
 
 nav {
+    font-family: "Inter", sans-serif;
     display:flex;
     justify-content: space-between;
     align-items: center;
@@ -41,7 +42,6 @@ nav {
 
 
 nav div {
-    flex: 1;
     display: flex;
     flex-direction: row;
     text-align: center;
@@ -54,11 +54,6 @@ nav ul {
     padding: 0;
     position: relative;
     list-style: none;
-}
-
-nav li {
-    gap: 20px;
-    font-family: "Inter", sans-serif;
 }
 
 nav a {
@@ -96,4 +91,28 @@ header svg {
 
 header p {
     color: #8a91a5;
+}
+
+/* For small screens (mobiles) */
+@media only screen and (max-width: 600px) {
+    body {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    nav ul {
+        gap: 1%;
+    }
+}
+
+/* For medium screens (tablets) */
+@media only screen and (min-width: 600px) and (max-width: 1000px) {
+    body {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    nav ul {
+        gap: 5%;
+    }
 }
