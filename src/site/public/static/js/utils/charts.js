@@ -19,6 +19,9 @@ function getDotsToDisplayByDeviceWidth() {
     return (window.innerWidth / 1920) * 50;
 }
 
+const skipped = (ctx, value) => ctx.p0.skip || ctx.p1.skip ? value : undefined;
+const down = (ctx, value) => ctx.p0.parsed.y > ctx.p1.parsed.y ? value : undefined;
+
 const getOrCreateTooltip = (chart) => {
     let tooltipEl = chart.canvas.parentNode.querySelector('div');
   
@@ -41,7 +44,7 @@ const getOrCreateTooltip = (chart) => {
     }
   
     return tooltipEl;
-  };
+};
   
 const externalTooltipHandler = (context) => {
     // Tooltip Element
@@ -242,6 +245,12 @@ export function getLatencyGraphConfig(ctx, data) {
                     label: "Latency in Time",
                     data: data.latencies,
                     borderColor: "rgba(54, 162, 235, 1)",
+                    segment: {
+                        borderColor: ctx => skipped(ctx, 'rgba(54, 162, 235, 0.7)'),
+                        borderDash: ctx => skipped(ctx, [6, 6]),
+                        backgroundColor: ctx => skipped(ctx, "rgba(0, 0, 0, 0)")
+                    },
+                    spanGaps: true,
                     backgroundColor: gradient,
                     borderWidth: getBorderWidthByDeviceWidth(),
                     pointRadius: getRadiusByDeviceWidth(),

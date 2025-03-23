@@ -55,7 +55,7 @@
                         <path d="m9 12 2 2 4-4"/>
                     </svg>
                     <h3>{{ service.service.display_name }}</h3>
-                    <a href="{{ service.service.endpoint }}" target="_blank">{{ service.service.endpoint.split('//', 1)[-1] }}</a>
+                    <a href="{{ service.service.url }}" target="_blank">{{ service.service.url.split('//', 1)[-1] }}</a>
                 </div>
                 {% if service.last_metric.timestamp %}
                 <p>Last updated on {{ service.last_metric.timestamp }} UTC</p>

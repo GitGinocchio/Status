@@ -5,8 +5,10 @@ CREATE TABLE IF NOT EXISTS services (
     name                                TEXT PRIMARY KEY,
     display_name                        TEXT,
     description                         TEXT,
+    url                                 TEXT,                                               -- "http://...", "ftp://..."
     endpoint                            TEXT,                                               -- "https://...", "wss://..."
     type                                TEXT,                                               -- "HTTP", "HTTPS", "FTP", "WSS" etc.
+    method                              TEXT,                                               -- "GET", "HEAD" etc.
     enabled                             BOOLEAN,
     monitoring_start                    DATETIME                                            -- "%Y-%m-%d %H:%M:%S"
 );

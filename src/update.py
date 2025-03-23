@@ -1,9 +1,12 @@
-from utils.db import Database
-from utils.config import config
 import requests
 
-db = Database()
+from utils.db import Database
+from utils.config import config
+from utils.terminal import getlogger
 
+logger = getlogger()
+
+db = Database()
 
 with db:
 
@@ -13,7 +16,7 @@ with db:
 
         code = "UnknownError"
         try:
-            response = requests.get(endpoint)
+            response = requests.head(endpoint, timeout=5)
             response.raise_for_status()
         except requests.exceptions.RequestException as e:
             if e.response:

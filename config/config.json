@@ -20,7 +20,8 @@
         "SSLError" : "SSL certificate verification failed",
         "InvalidUrl" : "The URL is not valid",
         "TooManyRedirects" : "Too many redirects were followed",
-        "UnknownError" : "An unknown error occurred",
+        "UnknownError" : "Unknown error, probably the service is down",
+        "HTTPError" : "An HTTP error occurred, probably the service is down",
     
         "100" : "Continue",
         "101" : "Switching Protocols",
