@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 
 from utils.templates import build_page, templates
+from utils.commons import isonline
 from utils.db import Database
 import os
 
@@ -22,7 +23,7 @@ def main():
             'last_metric' : metrics[-1] if len(metrics) > 0 else None
         })
 
-    build_page('index.html', services=service_metrics)
+    build_page('index.html', services=service_metrics, isonline=isonline)
     build_page('/service/index.html', services=services)
 
     build_page('/events/index.html')

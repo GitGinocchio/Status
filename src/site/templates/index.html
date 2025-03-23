@@ -65,7 +65,7 @@
                 <div class="content">
                     <div class="metrics">
                     {% for metric in service.metrics %}
-                        {% if metric.code == 200 %}
+                        {% if isonline(metric.code) %}
                         {% if loop.first %}
                         <div class="metric first green" onmouseover='showPopup(event,{{metric | tojson}})' onmouseout="hidePopup(event)"></div>
                         {% elif loop.last and metrics|length == 90 %}
