@@ -11,6 +11,6 @@ db = Database()
 with db:
     db.executeQueryScript("""
 UPDATE services
-SET endpoint = 'http://188.165.224.198:6398'
+SET endpoint = 'http://fi5.bot-hosting.net:21662'
 WHERE name = 'ggsbot';
 """)
