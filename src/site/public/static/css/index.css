@@ -124,9 +124,10 @@ main {
 }
 
 .tooltip .content {
+    text-wrap: auto;
     border-bottom: 1px solid #2d313c;
     padding-bottom: 5px;
-    gap: 5px;
+    /*gap: 5px;*/
 }
 
 .tooltip .footer {
