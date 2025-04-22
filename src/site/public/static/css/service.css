@@ -8,7 +8,7 @@ main {
 }
 
 #services-dropdown {
-    background-color: #f9f9f9;
+    background-color: #191c24;
     border-radius: 8px;
     padding: 20px;
     width: 300px;
@@ -18,7 +18,7 @@ main {
 
 #services-dropdown label {
     font-size: 1.2em;
-    color: #333;
+    color: f9f9f9;
     margin-bottom: 10px;
     display: block;
 }

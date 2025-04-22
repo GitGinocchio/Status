@@ -7,27 +7,7 @@ function showPopup(event, metric) {
         tooltip = document.createElement('div');
         tooltip.className = 'tooltip';
     }
-
     tooltip.classList.remove('hidden');
-
-    const skeletonContent = `
-    <div>
-        <div class="content">
-            <strong>Status:</strong> <span class="skeleton"></span><br>
-            <strong>Code:</strong> <span class="skeleton"></span><br>
-            ${metric.latency ? `<strong>Latency:</strong> <span class="skeleton"></span><br>` : "" }
-            ${metric.avg_latency ? `<strong>Avg Latency:</strong> <span class="skeleton"></span><br>` : "" }
-            ${metric.min_latency ? `<strong>Min Latency:</strong> <span class="skeleton"></span><br>` : "" }
-            ${metric.max_latency ? `<strong>Max Latency:</strong> <span class="skeleton"></span><br>` : "" }
-        </div>
-        <div class="footer">
-            <strong><span class="skeleton"></span></strong>
-        </div>
-    </div>
-    `;
-
-    // tooltip.innerHTML = skeletonContent;
-    // clearTimeout(realContentTimeout);
 
     const realContent = `
     <div>
@@ -45,15 +25,11 @@ function showPopup(event, metric) {
     </div>
     `;
 
-    // realContentTimeout = setTimeout(() => { tooltip.innerHTML = realContent; }, 300);
-
     tooltip.innerHTML = realContent;
 
-    // Posiziona il tooltip appena sotto il cursore con un offset di 10px
     tooltip.style.left = (event.clientX + 10) + 'px';
     tooltip.style.top = (event.clientY + 25) + 'px';
 
-    // Aggiungi il tooltip al body in modo da non essere influenzato da altri contenitori
     document.body.appendChild(tooltip);
 }
 
