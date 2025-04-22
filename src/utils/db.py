@@ -4,6 +4,7 @@ import sqlite3
 import json
 
 from utils.config import config
+from utils.commons import isonline
 from utils.queries import *
 from utils.terminal import getlogger
 
@@ -161,10 +162,10 @@ class Database:
             last_uptime : str | None
             last_downtime : str | None
 
-            current_uptime_percentage = 100 if code == 200 else 0
+            current_uptime_percentage = 100 if isonline(code) else 0
 
             if not last_metric: 
-                last_uptime, last_downtime = (timestamp, None) if code == 200 else (None, timestamp)
+                last_uptime, last_downtime = (timestamp, None) if isonline(code) else (None, timestamp)
 
                 self.executeQuery(NEW_METRIC_QUERY, (
                     name, 
@@ -200,13 +201,13 @@ class Database:
                 last_uptime, last_downtime = last_metric['last_uptime'], last_metric['last_downtime']
             else:
                 last_uptime, last_downtime = (timestamp, last_metric['last_downtime'])  \
-                                             if code == 200 else                        \
+                                             if isonline(code) else                     \
                                              (last_metric['last_uptime'], timestamp)
 
             current_uptime_value = None
             current_downtime_value = None
 
-            if last_metric['code'] == 200:
+            if isonline(last_metric['code']):
                 last_uptime_timestamp = last_metric['timestamp'] if last_metric['last_uptime'] == None else last_metric['last_uptime']
 
                 current_uptime_value = (now - datetime.strptime(last_uptime_timestamp, self.datefmt).astimezone(timezone.utc)).total_seconds()
