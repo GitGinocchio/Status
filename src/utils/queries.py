@@ -1,8 +1,8 @@
 # Services
 
 NEW_SERVICE_QUERY = """
-INSERT INTO services (name, display_name, description, endpoint, type, enabled, monitoring_start)
-VALUES (?, ?, ?, ?, ?, ?, ?)
+INSERT INTO services (name, display_name, description, url, endpoint, type, method, enabled, monitoring_start)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 """
 
 HAS_SERVICE_QUERY = """

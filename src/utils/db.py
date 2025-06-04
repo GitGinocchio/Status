@@ -96,11 +96,11 @@ class Database:
         else: 
             return [dict(row) for row in result]
 
-    def addService(self, name : str, display_name : str, description : str, endpoint : str, type : str, enabled : bool = True):
+    def addService(self, name : str, display_name : str, description : str, url : str, endpoint : str, type : str, method : str, enabled : bool = True):
         try:
             cursor = self.executeQuery(
                 NEW_SERVICE_QUERY, 
-                (name, display_name, description, endpoint, type, enabled, datetime.now(timezone.utc).strftime(self.datefmt))
+                (name, display_name, description, url, endpoint, type, method, enabled, datetime.now(timezone.utc).strftime(self.datefmt))
             )
         except sqlite3.IntegrityError as e:
             self.connection.rollback()
